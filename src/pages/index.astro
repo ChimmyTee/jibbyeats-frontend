@@ -1,12 +1,34 @@
 ---
-import { Button } from "@/components/ui/button"
-import Layout from "@/layouts/Layout.astro"
+import { Button } from "@/components/ui/button";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import hero from "../assets/hero.png";
+import landing from "../assets/landing.png";
+import appDownload from "../assets/appDownload.png";
 ---
 
 <Layout title="JibbyEats">
-	<div class="container">
-		<div class="py-4"></div>
-		<h1>INDEX PAGE STUFF</h1>
-		<Button>Hello World</Button>
+	<Image src={hero} alt="Hero" class="max-h-[600px] object-cover"></Image>
+	<div class="container flex flex-col gap-12">
+		<div class="bg-white rounded-lg shadow-md py-8 text-center -mt-12">
+			<h1 class="text-4xl font-bold">Tuck into a cozy meal today</h1>
+			<span>Food is just a click away!</span>
+		</div>
+		<div class="grid md:grid-cols-2 gap-5">
+			<Image src={landing} alt="Landing"/>
+			<div class="flex flex-col items-center justify-center tracking-tight">
+				<span class="text-xl font-bold">We are also available on the App store</span>
+				<span class="pb-4">The better experience on mobile</span>
+				<Image src={appDownload} alt="appDownload Links"/>
+			</div>
+		</div>
+		
+	</div>
+	<div class="bg-sky-200 py-6 mt-10">
+		<div class="container">
+			<h1>JibbyEats</h1>
+			<div>Terms and Conditions</div>
+			<div>Privacy Policy</div>
+		</div>
 	</div>
 </Layout>

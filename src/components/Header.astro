@@ -1,10 +1,14 @@
 ---
 import { SheetMobileMenu } from "@/components/SheetMobileMenu";
+import { Button } from "./ui/button";
 ---
 
-<div class="border-b-2 border-b-orange-500 py-12">
+<div class="border-b-2 border-b-orange-500 py-8">
   <div class="container mx-auto flex justify-between items-center">
     <a href="/">LOGO</a>
+    <div class="hidden md:block">
+      <Button variant="ghost">Login In</Button>
+    </div>
     <div class="md:hidden">
       <SheetMobileMenu client:load />
     </div>

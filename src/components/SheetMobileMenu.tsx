@@ -5,14 +5,14 @@ import {
     SheetTitle,
     SheetTrigger,
 } from "@/components/ui/sheet";
-
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
+import { Menu } from 'lucide-react';
 
 export function SheetMobileMenu() {
     return (
         <Sheet>
-            <SheetTrigger>Burger Icon</SheetTrigger>
+            <SheetTrigger><Menu/></SheetTrigger>
             <SheetContent className="space-y-3">
                 <SheetTitle>JibbyEats</SheetTitle>
                 <Separator />
