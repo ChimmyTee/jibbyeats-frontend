@@ -1,13 +1,20 @@
 ---
 import { SheetMobileMenu } from "@/components/SheetMobileMenu";
 import { Button } from "./ui/button";
+const user = Astro.locals.user;
+console.log(user?.username);
 ---
 
 <div class="border-b-2 border-b-orange-500 py-8">
   <div class="container mx-auto flex justify-between items-center">
     <a href="/">LOGO</a>
     <div class="hidden md:block">
-      <Button variant="ghost">Login In</Button>
+      {user? <h1>{user.username}</h1> : <h1>not cool</h1>}
+      <!-- <Button variant="ghost">Login In</Button> -->
+      <a href="/login"><Button variant="ghost">Login In</Button></a>
+      <form method="post" action="/api/logout">
+        <button>Sign out</button>
+      </form>
     </div>
     <div class="md:hidden">
       <SheetMobileMenu client:load />
