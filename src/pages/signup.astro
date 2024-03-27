@@ -4,11 +4,33 @@ import Layout from "@/layouts/Layout.astro";
 
 <Layout title="signUp">
   <h1>Sign up</h1>
-  <form method="post" action="/api/signup">
+  <form id="signUpForm" method="post" action="/api/signup">
     <label for="username">Username</label>
     <input id="username" name="username" />
     <label for="password">Password</label>
     <input id="password" name="password" />
     <button>Continue</button>
+    <p id="form-errorr">error yet?</p>
   </form>
 </Layout>
+
+<script>
+	const errorMessageElement = document.getElementById("form-errorr")!;
+  console.log(document.forms.length);
+
+  const signUpFormElement = document.getElementById("signUpForm");
+	signUpFormElement?.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		errorMessageElement.innerText = "";
+		const formElement = e.target as HTMLFormElement;
+		const response = await fetch(formElement.action, {
+			method: formElement.method,
+			body: new FormData(formElement)
+		});
+		if (response.ok) {
+			window.location.href = "/";
+		} else {
+			errorMessageElement.innerText = (await response.json()).error;
+		}
+	});
+</script>

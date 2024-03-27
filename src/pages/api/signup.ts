@@ -41,34 +41,43 @@ export async function POST(context: APIContext): Promise<Response> {
   }
 
   const hashedPassword = await new Argon2id().hash(password);
-//   const userId = generateId(15);
+  //   const userId = generateId(15);
   const userId = new ObjectId();
 
   try {
-    db.collection("users").insertOne({
-      _id: userId.toString() as any,
-      username: username,
-      password: hashedPassword,
-    });
-
-    const session = await lucia.createSession(userId.toString(), {});
-    const sessionCookie = lucia.createSessionCookie(session.id);
-    context.cookies.set(
-      sessionCookie.name,
-      sessionCookie.value,
-      sessionCookie.attributes
-    );
-
-    return new Response("Successfully added new user");
+    if (await db.collection("users").findOne({ username: username })) {
+      return new Response(
+        JSON.stringify({
+          error: "Username already used",
+        }),
+        {
+          status: 400,
+        }
+      );
+    } else {
+      db.collection("users").insertOne({
+        _id: userId.toString() as any,
+        username: username,
+        password: hashedPassword,
+      });
+      return new Response("Successfully added new user");
+    }
+    // const session = await lucia.createSession(userId.toString(), {});
+    // const sessionCookie = lucia.createSessionCookie(session.id);
+    // context.cookies.set(
+    //   sessionCookie.name,
+    //   sessionCookie.value,
+    //   sessionCookie.attributes
+    // );
   } catch (e) {
-    return new Response(
-      JSON.stringify({
-        error: "Username already used",
-      }),
-      {
-        status: 400,
-      }
-    );
+    // return new Response(
+    //   JSON.stringify({
+    //     error: "Username already used",
+    //   }),
+    //   {
+    //     status: 400,
+    //   }
+    // );
     return new Response(
       JSON.stringify({
         error: "An unknown error occurred",

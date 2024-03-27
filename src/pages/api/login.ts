@@ -1,6 +1,7 @@
 import { db, lucia } from "../../lib/auth";
 import { Argon2id } from "oslo/password";
 import type { APIContext } from "astro";
+import type { DatabaseUser } from "lucia";
 
 export async function POST(context: APIContext): Promise<Response> {
 	const formData = await context.request.formData();
@@ -26,7 +27,7 @@ export async function POST(context: APIContext): Promise<Response> {
 	if (!existingUser) {
 		return new Response(
 			JSON.stringify({
-				error: "Incorrect username or password"
+				error: "Incorrect username"
 			}),
 			{
 				status: 400
@@ -38,7 +39,7 @@ export async function POST(context: APIContext): Promise<Response> {
 	if (!validPassword) {
 		return new Response(
 			JSON.stringify({
-				error: "Incorrect username or password"
+				error: "Incorrect password"
 			}),
 			{
 				status: 400
