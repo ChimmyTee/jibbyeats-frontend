@@ -2,6 +2,7 @@
 import { SheetMobileMenu } from "@/components/SheetMobileMenu";
 import { Button } from "./ui/button";
 const user = Astro.locals.user;
+import MobileNav from "../components/MobileNav.astro";
 ---
 
 <div class="border-b-2 border-b-orange-500 py-8">
@@ -16,7 +17,8 @@ const user = Astro.locals.user;
       </form>
     </div>
     <div class="md:hidden">
-      <SheetMobileMenu client:load />
+      <!-- <SheetMobileMenu client:load /> -->
+      <MobileNav />
     </div>
   </div>
 </div>

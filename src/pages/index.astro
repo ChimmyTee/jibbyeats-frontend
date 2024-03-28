@@ -5,6 +5,13 @@ import { Image } from "astro:assets";
 import hero from "../assets/hero.png";
 import landing from "../assets/landing.png";
 import appDownload from "../assets/appDownload.png";
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 ---
 
 <Layout title="JibbyEats">
@@ -22,7 +29,6 @@ import appDownload from "../assets/appDownload.png";
 				<Image src={appDownload} alt="appDownload Links"/>
 			</div>
 		</div>
-		
 	</div>
 	<div class="bg-sky-200 py-6 mt-10">
 		<div class="container">

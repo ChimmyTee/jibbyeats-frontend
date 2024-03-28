@@ -14,7 +14,7 @@ export function SheetMobileMenu() {
         <Sheet>
             <SheetTrigger><Menu/></SheetTrigger>
             <SheetContent className="space-y-3">
-                <SheetTitle>JibbyEats</SheetTitle>
+                <SheetTitle>Whatever Title</SheetTitle>
                 <Separator />
                 <SheetDescription className="flex">
                     <Button className="flex-1 font-bold bg-sky-600 hover:bg-sky-500">Login Now</Button>
