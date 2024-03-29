@@ -6,10 +6,10 @@ import MobileNav from "../components/MobileNav.astro";
 ---
 
 <div class="border-b-2 border-b-orange-500 py-8">
-  <div class="container mx-auto flex justify-between items-center">
+  <div class="container mx-auto flex justify-between items-center h-10">
     <a href="/">LOGO</a>
     <div class="hidden md:block">
-      {user? <h1>{user.username}</h1> : <h1>not cool</h1>}
+      {user ? <h1>{user.username}</h1> : <h1>not cool</h1>}
       <!-- <Button variant="ghost">Login In</Button> -->
       <a href="/login"><Button variant="ghost">Login In</Button></a>
       <form method="post" action="/api/logout">

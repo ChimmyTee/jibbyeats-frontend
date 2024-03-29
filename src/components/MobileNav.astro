@@ -1,50 +1,55 @@
 ---
-
+import { Menu, MoveRight } from "lucide-react";
 ---
 
-<!-- Main content goes here -->
-<button id="open-button" class="bg-gray-800 text-white px-3 py-2 rounded"
-  >Open</button
->
+<div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-20 z-30 hidden"></div>
 
-<dialog
-  id="sidebar-dialog"
-  class="h-screen w-64 bg-gray-800 text-white fixed top-0 right-0 transform translate-x-full transition duration-300 ease-in-out z-10"
+<div
+  id="sidebar"
+  class="h-screen bg-stone-200 shadow-lg w-64 fixed top-0 right-0 overflow-hidden transform translate-x-full transition duration-300 ease-in-out z-40"
 >
-  <div class="dialog-content">
-    <button id="close-button" class="bg-gray-800 text-white px-3 py-2 rounded"
-      >Close</button
-    >
-    <h1>Title</h1>
-  </div>
-</dialog>
+  <div class="flex justify-end px-4 py-2"><button><MoveRight id="close-button"/></button></div>
+  <h1 class="text-center px-4 py-2">JibbyEats</h1>
+</div>
+
+<button id="open-button"><Menu /></button>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    const sidebar = document.getElementById("sidebar")!;
+    const overlay = document.getElementById("overlay")!;
     const openButton = document.getElementById("open-button")!;
     const closeButton = document.getElementById("close-button")!;
-    const dialog = document.getElementById("sidebar-dialog")! as any;
 
     openButton.addEventListener("click", function () {
-      openDialog();
+      openSidebar();
     });
 
     closeButton.addEventListener("click", function () {
-      closeDialog();
+      closeSidebar();
     });
 
-    function openDialog() {
-      dialog.showModal();
-    }
+    document.addEventListener("click", function (event) {
+      const isClickInsideSidebar = sidebar.contains(event.target as Node);
+      const isClickInsideOpenButton = openButton.contains(event.target as Node);
 
-    function closeDialog() {
-      dialog.close();
-    }
-
-    dialog.addEventListener("click", function (event: any) {
-      if (event.target === dialog) {
-        closeDialog();
+      if (!isClickInsideSidebar && !isClickInsideOpenButton) {
+        closeSidebar();
       }
     });
+
+    function openSidebar() {
+      sidebar.classList.remove("translate-x-full");
+      sidebar.classList.add("translate-x-0");
+      openButton.classList.add("hidden");
+      overlay.classList.remove("hidden");
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove("translate-x-0");
+      sidebar.classList.add("translate-x-full");
+      openButton.classList.remove("hidden");
+      overlay.classList.add("hidden");
+    }
   });
 </script>
